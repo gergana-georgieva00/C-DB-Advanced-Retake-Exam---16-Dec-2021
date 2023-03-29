@@ -22,7 +22,7 @@ namespace Artillery.Data.Models
         public int ManufacturerId  { get; set; }
         public Manufacturer? Manufacturer { get; set; }
         [Required]
-        public string? GunWeight { get; set;}
+        public int? GunWeight { get; set;}
         [Required]
         public double BarrelLength  { get; set; }
         public int NumberBuild { get; set; }
