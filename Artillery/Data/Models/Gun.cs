@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Artillery.Data.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,8 +29,10 @@ namespace Artillery.Data.Models
         public int Range { get; set; }
         [Required]
         public GunType GunType { get; set; }
-        [Required]
+        
+        [Required, ForeignKey(nameof(Shell))]
         public int ShellId { get; set; }
+        public Shell Shell { get; set; }
         public ICollection<CountryGun> CountriesGuns { get; set; }
     }
 }

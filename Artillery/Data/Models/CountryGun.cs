@@ -14,6 +14,7 @@ namespace Artillery.Data.Models
         [Required, ForeignKey(nameof(Country))]
         public int CountryId { get; set; }
         public Coutry? Country { get; set; }
+
         [Required, ForeignKey(nameof(Gun))]
         public int GunId { get; set; }
         public Gun? Gun { get; set; }
