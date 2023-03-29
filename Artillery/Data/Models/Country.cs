@@ -11,7 +11,7 @@ namespace Artillery.Data.Models
     {
         public Country()
         {
-            CountriesGuns = HashSet<CountryGun>();
+            CountriesGuns = new HashSet<CountryGun>();
         }
 
         [Key]

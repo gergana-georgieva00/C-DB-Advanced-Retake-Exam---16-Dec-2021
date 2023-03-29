@@ -9,7 +9,7 @@ namespace Artillery.Data.Models
 {
     public class Shell
     {
-        public Manufacturer()
+        public Shell()
         {
             Guns = new HashSet<Gun>();
         }
@@ -19,7 +19,7 @@ namespace Artillery.Data.Models
         [Required]  
         public double ShellWeight { get; set; }
         [Required]
-        public string Caliber { get; set; }
+        public string? Caliber { get; set; }
         public ICollection<Gun> Guns { get; set; }
     }
 }

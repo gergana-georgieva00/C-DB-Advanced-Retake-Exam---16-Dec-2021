@@ -21,7 +21,7 @@ namespace Artillery.Data.Models
         [Required]
         public int ManufacturerId  { get; set; }
         [Required]
-        public string GunWeight { get; set;}
+        public string? GunWeight { get; set;}
         [Required]
         public double BarrelLength  { get; set; }
         public int NumberBuild { get; set; }
@@ -32,7 +32,7 @@ namespace Artillery.Data.Models
         
         [Required, ForeignKey(nameof(Shell))]
         public int ShellId { get; set; }
-        public Shell Shell { get; set; }
+        public Shell? Shell { get; set; }
         public ICollection<CountryGun> CountriesGuns { get; set; }
     }
 }
