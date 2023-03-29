@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Artillery.Data.Models
 {
-    public class Coutry
+    public class Country
     {
-        public Coutry()
+        public Country()
         {
             CountriesGuns = HashSet<CountryGun>();
         }

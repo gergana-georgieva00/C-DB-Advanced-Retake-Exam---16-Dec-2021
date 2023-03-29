@@ -16,7 +16,13 @@
         { 
         }
 
-         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        DbSet<CountryGun> CountriesGuns { get; set; }
+        DbSet<Country> Countries { get; set; }
+        DbSet<Gun> Guns { get; set; }
+        DbSet<Manufacturer> Manufacturers { get; set; }
+        DbSet<Shell> Shells { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
@@ -27,6 +33,10 @@
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<CountryGun>(entity =>
+            {
+                entity.HasKey(cg => new { cg.GunId, cg.CountryId });
+            });
         }
     }
 }
