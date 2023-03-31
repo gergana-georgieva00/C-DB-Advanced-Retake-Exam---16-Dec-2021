@@ -52,7 +52,34 @@
 
         public static string ImportManufacturers(ArtilleryContext context, string xmlString)
         {
-            throw new NotImplementedException();
+            var manufacturerDtos = Deserialize<ImportXmlManufacturer[]>(xmlString, "Manufacturers");
+            var sb = new StringBuilder();
+            var manufacturers = new List<Manufacturer>();
+
+            foreach (var dto in manufacturerDtos)
+            {
+                if (!IsValid(dto))
+                {
+                    sb.AppendLine(ErrorMessage);
+                    continue;
+                }
+
+                var manufacturer = new Manufacturer()
+                {
+                    ManufacturerName = dto.ManufacturerName,
+                    Founded = dto.Founded
+                };
+
+                manufacturers.Add(manufacturer);
+                var founded = string.Join(", ", dto.Founded.Split(' '));
+                sb.AppendLine(String.Format(SuccessfulImportCountry, dto.ManufacturerName, founded));
+            }
+
+            context.AddRange(manufacturers);
+            context.SaveChanges();
+
+
+            return sb.ToString().TrimEnd();
         }
 
         public static string ImportShells(ArtilleryContext context, string xmlString)
