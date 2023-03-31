@@ -72,19 +72,44 @@
 
                 manufacturers.Add(manufacturer);
                 var founded = string.Join(", ", dto.Founded.Split(' '));
-                sb.AppendLine(String.Format(SuccessfulImportCountry, dto.ManufacturerName, founded));
+                sb.AppendLine(String.Format(SuccessfulImportManufacturer, dto.ManufacturerName, founded));
             }
 
             context.AddRange(manufacturers);
             context.SaveChanges();
-
 
             return sb.ToString().TrimEnd();
         }
 
         public static string ImportShells(ArtilleryContext context, string xmlString)
         {
-            throw new NotImplementedException();
+            var shellDtos = Deserialize<ImportXmlShell[]>(xmlString, "Shells");
+            var sb = new StringBuilder();
+            var shells = new List<Shell>();
+
+            foreach (var dto in shellDtos)
+            {
+                if (!IsValid(dto))
+                {
+                    sb.AppendLine(ErrorMessage);
+                    continue;
+                }
+
+                var shell = new Shell()
+                {
+                    ShellWeight = dto.ShellWeight,
+                    Caliber = dto.Caliber
+                };
+
+                shells.Add(shell);
+                sb.AppendLine(String.Format(SuccessfulImportShell, dto.Caliber, dto.ShellWeight));
+            }
+
+            context.AddRange(shells);
+            context.SaveChanges();
+
+
+            return sb.ToString().TrimEnd();
         }
 
         public static string ImportGuns(ArtilleryContext context, string jsonString)
